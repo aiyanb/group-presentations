@@ -2,7 +2,6 @@
 *.bbl
 *.blg
 *.fdb_latexmk
-*.txt
 *.fls
 *.log
 *.nav

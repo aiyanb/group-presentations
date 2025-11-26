@@ -1,0 +1,3 @@
+- Claudiu/ Xiaohan consider the "picket fence model" considered by Kusimi (https://www-annualreviews-org.myaccess.library.utoronto.ca/content/journals/10.1146/annurev.biophys.34.040204.144637) to be a more viable model
+- Is anomalous diffusion/ confinement an artifact of averaging?
+- What is the role of interaction?

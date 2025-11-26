@@ -1,0 +1,8 @@
+- Barriers due to actin skeleton by themselves not sufficient for non-Lebesgue steady state
+
+- Four current models:
+    1. Motion just determined by diffusivity (see November 19 presentation) but did not consider a steep enough diffusivity field; lipid rafts have much starker
+    2. Diffusivity + interaction between receptors sufficient to drive localization to lower diffusivity regions?
+    3. Correlations between the barriers and actin barriers sufficient to drive localization?
+        - Can we use random tessellations/ stochastic geometry to understand these systems? Area drawn from, say, power-law distribution
+    4. Non-equilibrium source/ sink of receptors leads to localization in lower diffusivity/ "confined" domains
