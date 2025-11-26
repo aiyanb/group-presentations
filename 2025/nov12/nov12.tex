@@ -1,0 +1,244 @@
+\documentclass[12pt]{beamer}
+
+\usetheme{Madrid}
+
+\usepackage{amsmath, amsfonts}
+\usepackage{hyperref}
+\usepackage[super,comma,numbers]{natbib}
+\renewcommand{\bibnumfmt}[1]{[#1]}
+\bibliographystyle{apsrev4-1}
+
+
+\newcommand{\norm}[1]{\left| \left| #1 \right| \right|}
+\newcommand{\notimplies}{\;\not\!\!\!\implies}
+
+
+\begin{document}
+
+\begin{frame}{Multiplicative noise and the interpretation problem}
+    When multiplicative noise is introduced to an SDE, i.e.,
+    \begin{equation} \label{eq:1}
+        d X_t = \mu (X_t) \, dt + \sigma (X_t) \cdot d W_t,
+    \end{equation}
+    for $\sigma (X_t) \neq \mathrm{const}.$, the manner in which the integral over a process $Y_t$,
+    \begin{equation} \label{eq:2}
+        I = \int_0^t Y_t \cdot d W_t
+    \end{equation}
+    is interpreted influences the resulting FPE~\cite{LL07}
+\end{frame}
+
+\begin{frame}{The interpreation problem}
+    There are three primary interpretations of the above integral. 
+    Each are the style of Riemann-Stieltjes over a partition $0 = t_0 < t_1 < \dots < t_n = T$ with mesh $P$.
+    \pause
+    \begin{enumerate}
+        \item It\^{o} integral (left endpoint)
+        \begin{equation} \label{eq:3}
+            \int_0^t Y_t \, d W_t = \lim_{\norm{P} \to 0} \sum_{i = 0}^{n-1} Y_{t_i} (W_{t_{i+1}} - W_{t_i})
+        \end{equation}
+        \item Statonovich (midpoint)
+        \begin{equation} \label{eq:4}
+            \int_0^t Y_t \circ d W_t = \lim_{\norm{P} \to 0} \sum_{i = 0}^{n-1} \frac{Y_{t_{i+1}} - Y_{t_i}}{2} (W_{t_{i+1}} - W_{t_i})
+        \end{equation}
+        \item Hänggi-Klimontovich/ isothermal (right endpoint)
+        \begin{equation} \label{eq:5}
+            \int_0^t Y_t \diamond d W_t = \lim_{\norm{P} \to 0} \sum_{i = 0}^{n-1} Y_{t_{i+1}} (W_{t_{i+1}} - W_{t_i})
+        \end{equation}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Which to choose? : The Wong-Zakai theorem}
+    \textbf{Theorem}. If $W^{(\varepsilon)}$ is a smooth $\varepsilon$-approximation to a Brownian motion $B$,
+    for smooth functions $\mu$ and $\sigma$, the solution to the ODE,
+    \begin{equation} \label{eq:6}
+        \Dot{X}^{(\varepsilon)} = \mu (X^{(\varepsilon)}) + \sigma (X^{(\varepsilon)}) W^{(\varepsilon)},
+    \end{equation}
+    $X^{(\varepsilon)}$, converges in probability, as $\varepsilon \to 0$, to the solution to the SDE given in Eq.~\eqref{eq:1}, 
+    interpreted in the Stratonovich sense~\cite{WZ65}
+    \pause
+    \begin{itemize}
+        \item Implication: If the noise of our system is derived from microscopic degrees of freedom with finite correlation times, the SDE should be interpreted in the Stratonovich sense
+        \item All forms give the same FPE~\cite{LL07} but translation between forms gives an additional drift
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Analytical forms}
+    \begin{itemize}
+        \item Following the notation of Eq.~\eqref{eq:1}, let $\mu (X_t) = 0$ and $\sigma (X_t) = \sqrt{2 D (X_t)}$ for a diffusivity field $D$,
+        \begin{equation}
+            d X_t = \sqrt{2 D (X_t)} \circ d W_t = \frac{1}{2} \nabla D \, dt  + \sqrt{2 D(X_t)} \, d W_t
+        \end{equation}
+        \pause
+        \begin{itemize}
+            \item This latter form of SDE is much easier to numerically integrate due to the interpretation of the multiplication
+        \end{itemize}
+        \item The FPE for the system, likewise, picks up an additional drift term (i.e., $\propto \nabla p$) when the diffusivity is heterogeneous,
+        \begin{equation} \label{eq:7}
+            \frac{\partial p (t,x)}{\partial t} = \nabla \cdot \left( D(x) \nabla p (t,x) \right)
+        \end{equation}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Formulating the problem in analysis (PDE)}
+    Let $(M,g)$ be a complete Riemannian manifold. 
+    Given a scalar field $\kappa : M \to \mathbb{R}$ which satisfies
+    $0 < \lambda \leq \kappa (x) \leq \Lambda < \infty$ $\forall x \in M$,
+    what, if anything, can be said about the heterogeneous-conductivity heat equation
+    \begin{equation}
+        \partial_t u (t,x) = \nabla_g \cdot \left( \kappa (x) \nabla_g u (t,x) \right),
+    \end{equation}
+    for a smooth function $u$ of $(t,x) \in \mathbb{R}^+ \times M$?
+    \pause
+
+    Some interesting questions:
+    \begin{enumerate}
+        \item Well-posedness: Does the Cauchy problem admit a unit solution for a given $\kappa$ and $u(0,x)$?
+        \item Stability: If $\kappa_n \to \kappa$, do the corresponding solutions $u_n \to u$?
+        \item Kernel: How does the the kernel compare with the heat kernel?
+        \item Phenomenological: What is the interplay between curvature and the diffusive behaviour?
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Treating a simple case in $\mathbb{R}$}
+    The equation now takes the much less daunting form
+    \begin{equation*}
+        \frac{\partial u}{\partial t} = \frac{\partial}{\partial x} \left( \kappa (x) \frac{\partial u}{\partial x} \right)
+    \end{equation*}
+    subject to $u(0,x) = f(x)$ with periodic BCs
+    \pause
+    \begin{itemize}
+        \item For the sake of simplicity, let's choose the system
+        \begin{equation}
+            \kappa (x) = A \left[ 1 - \sin^{2n} \left( \frac{\pi x}{L} \right) \right] + \varepsilon,
+        \end{equation}
+        \item Reduces the PDE to -- $\tau = A \pi^2 t / L^2$, $y = \pi x / L$, $b = \varepsilon / A$ --
+        \begin{equation}
+            \frac{\partial u}{\partial \tau} = - 2n \sin^{2n-1}{(y)} \cos{y} \frac{\partial u}{\partial y} + \left( 1 - \sin^{2n}{y} + b \right) \frac{\partial^2 u}{\partial y^2}
+        \end{equation}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Treating a simple case in $\mathbb{R}$}
+    \begin{columns}
+        \begin{column}{0.333\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/diffusivity1.pdf}
+                \caption{n=1}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.333\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/diffusivity2.pdf}
+                \caption{n=2}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.333\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/diffusivity3.pdf}
+                \caption{n=5}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Numerical results in $\mathbb{R}$ (PDE)}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/b0p1-n2.png}
+                \caption{$n = 2$, $b = 0.1$, $f(x) = \delta(x - \pi/2)$}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/b0p1-n5.png}
+                \caption{$n = 5$, $b = 0.1$, $f(x) = \delta(x - \pi/2)$}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Numerical results in $\mathbb{R}$ (PDE)}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/b0p1-n1-pio2.png}
+                \caption{$n = 1$, $b = 0.1$ with $\sin \to \cos$}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/b0p1-n2-pi02.png}
+                \caption{$n = 2$, $b = 0.1$ with $\sin \to \cos$}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Numerical results in $\mathbb{R}$ (SDE)}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{figures/mean-msd-n5.pdf}
+        \caption{MSD with averaging performed over the entire trajectory; $n=5$, $b=0.1$}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Numerical results in $\mathbb{R}$ (SDE)}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+             \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/low-diff-n5.pdf}
+                \caption{Slow phase MSD; $n=5$, $b=0.1$}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/high-diff-n5.pdf}
+                \caption{Fast phase MSD; $n=5$, $b=0.1$}
+            \end{figure}
+        \end{column}
+    \end{columns}
+    \pause
+    \begin{itemize}
+        \item Phases distinguished by having diffusivities above and below $\kappa = b+1/4$, respectively
+        \pause
+        \item Observe anomalous diffusion in both domains on different timescales!
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Numerical results in $\mathbb{R}$ (SDE)}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+             \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/low-diff-n5-0p5.pdf}
+                \caption{Slow phase MSD; $n=5$, $b=0.1$}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/high-diff-n5-0p5.pdf}
+                \caption{Fast phase MSD; $n=5$, $b=0.1$}
+            \end{figure}
+        \end{column}
+    \end{columns}
+    \begin{itemize}
+        \item Phases distinguished by having diffusivities above and below $\kappa = b+1/2$, respectively
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{References}
+    \bibliography{references}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,165 @@
+\documentclass[12pt]{beamer}
+
+\usetheme{Madrid}
+
+\usepackage{amsmath, amsfonts}
+\usepackage{bbm} % for \mathbbm{1}
+\usepackage{hyperref}
+\usepackage[super,comma,numbers]{natbib}
+\renewcommand{\bibnumfmt}[1]{[#1]}
+\bibliographystyle{apsrev4-1}
+
+
+\newcommand{\norm}[1]{\left| \left| #1 \right| \right|}
+\newcommand{\notimplies}{\;\not\!\!\!\implies}
+
+\author{A. Brown}
+
+
+\begin{document}
+
+\begin{frame}{Diffusion gradients as forces}
+    \begin{itemize}
+        \item To induce trapping, phenomenologically introduce an attractive drift
+        \begin{equation}
+            a (X_t) = - \alpha \Gamma (X_t) \nabla \kappa (X_t),
+        \end{equation}
+        $\alpha > 0$ and Onsager coefficient related by an FDT, $\kappa(x) = 2 k_B T \Gamma (X_t)$, to our Langevin equation such that
+        \begin{equation}
+            d X_t = a (X_t) \, dt + \sqrt{2 \kappa (X_t)} \circ d W_t
+        \end{equation}
+        \pause
+        \item The steady state is $\rho_\infty (x) \propto e^{- \beta \alpha \kappa(x)}$ and the FPE
+        \begin{equation}
+            \partial_t p (x,t) = \nabla \cdot \left[ \kappa \left( \beta \alpha \nabla \kappa + \nabla \right) \right] p(x,t)
+            = - \mathcal{L} p (x,t)
+        \end{equation}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Why might this make sense?}
+    \begin{itemize}
+        \item Diffusivity is a mesoscopic realization of a microscopic behaviour:
+        (i) local lipid order, (ii) curvature, (iii) membrane thickness, etc.
+        \pause
+        \begin{itemize}
+            \item Thought 1: Might it be better to try and formulate a more microscopic model?
+            \pause
+            \item Suppose that these regions can be effectively characterized by a slowly changing environmental field $\phi$
+            \pause
+            \item Free energy has a long-wavelength contribution $F(X) \sim U(\phi (X))$, which the diffusivity also depends upon explicitly, $\kappa(X) = \kappa (\phi (X))$
+            \item To linear order in $\phi$, $\nabla \phi \propto \nabla \kappa \propto \nabla F$
+            \pause
+            \item Thought 2: To higher order, treating $\kappa$ as an order parameter, can we consider $\nabla^2 \kappa$, $\kappa^2$, etc. terms?
+        \end{itemize}
+        \pause
+        \item Thermodynamically, entering a more confined phase has an entropy reduction - needs to be compensated for
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{A ``convenient'' change of variables}
+    \begin{itemize}
+        \item Consider the change of variables, for a second differentiable, time-independent diffusivity field satisfying $\kappa(x) > 0$,~\cite{PhysRevA.36.5791}
+        \begin{equation}
+            x \mapsto X = \int_0^x \frac{dx'}{\sqrt{\kappa(x')}}; \qquad 
+            \frac{\partial}{\partial x} \mapsto \frac{1}{\sqrt{\kappa(x)}} \frac{\partial}{\partial X}
+        \end{equation}
+        \pause
+        \item After no short amount of algebra, it can be shown that this results in the generator taking the form $\mathcal{L} = \mathcal{L}_0 + \mathcal{L}'$,
+        where $\mathcal{L}_0 = - \partial_X^2$ and the interaction generator is 
+        \begin{multline}
+            \mathcal{L}' = - \frac{1}{\sqrt{\kappa}} \left( \partial_X \sqrt{\kappa} \right) \left[ \partial_X + \beta \alpha (\partial_X \kappa) \right] \\
+            - \beta \alpha \left[ (\partial_X^2 \kappa) + \left( \partial_X \kappa \right) \partial_X \right]
+        \end{multline}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{A Green's function formulation}
+    \begin{itemize}
+        \item Assuming time translation invariance and look for Green's function solutions, $G (X, Y; t)$ (transition from $X$ to $Y$ in time $t$)
+        \item It is easier to consider the Fourier transformed function, $G (X, Y; \omega)$, whose PDE is $\left( - i \omega + \hat{\mathcal{L}} \right) \hat{G} = \mathbbm{1}$,
+        which is formally solved by
+        \begin{equation}
+            \hat{G} = \left( - i \omega + \hat{\mathcal{L}} \right)^{-1}
+        \end{equation}
+        \pause
+        \item Can then solve for $\hat{G}$ in powers of $\mathcal{L}'$ via the Dyson equation, $\hat{G} = \hat{G}_0 + \hat{G}_0 \hat{\mathcal{L}}' \hat{G}$,
+        where $\hat{G}_0$ is the unperturbed Green function of the diffusion generator, i.e. $\mathcal{L} \to \mathcal{L}_0$
+        \pause
+        \item Might prove to be useful if the diffusivity field is largely homogeneous except for small (both in magnitude and area) fluctuations at e.g. lipid raft domains
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Trapping's effect on diffusive behaviour}
+    \begin{itemize}
+        \item Consider the It\^{o} SDE,
+        \begin{equation}
+            d X_t = \left[ 1 - \frac{1}{2} \alpha \beta \kappa (X_t) \right] \nabla \kappa (X_t) \, dt 
+            + \sqrt{2 \kappa (X_t)} \, dW_t
+        \end{equation}
+        \pause
+        \item Choose the system with periodic BC on $[0,L)$, with diffusivity
+        \begin{equation}
+            \kappa (x) = A \left[ 1 - \sin^{2n} \left( \frac{\pi x}{L} \right) \right] + \varepsilon,
+        \end{equation}
+        \item SDE can be non-dimensionalized to the form
+        \begin{multline}
+            d Y_\tau = n \left[ \gamma \left( 1 + b - \sin^{2n}{Y} \right) - 2 \right] \sin^{2n-1}{Y} \cos{Y} \, d \tau + \\
+            \sqrt{2 \left( 1 + b - \sin^{2n}{Y} \right)} \, d W_\tau
+        \end{multline}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Trapping's effect on diffusive behaviour}
+    \begin{itemize}
+        \item Was not able to find any reasonable choice of diffusivity that would amount to any change in the asymptotic MSD scaling
+        \begin{itemize}
+            \item Apparent anomalous behaviour from last week seems to have exclusively been a result of the domain
+            \item Recovered apparent anomalous behaviour when $b \to 0$ -- effectively converging towards a CTRW
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{References}
+    \bibliography{references}
+\end{frame}
+
+\begin{frame}{The unperturbed Green's function}
+    \begin{itemize}
+        \item Taking the Fourier transform with respect to space maps $\partial_X \to i k$ and hence $G (k, \omega) = (-i \omega + k^2)^{-1}$,
+        which is the standard heat kernel
+        \item We can transform back to real time/ space by taking a pair of contour integrals,
+        \begin{equation}
+            G (k, t) = \Theta (t) e^{- k^2 t}; \qquad G (X, t) = \frac{1}{\sqrt{4 \pi t}} \Theta (t) e^{-X^2 / 4 t}
+        \end{equation}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Perturbation theory}
+    \begin{itemize}
+        \item We regard $\kappa$ as the continuum limit of a discrete function.
+        First, we consider the case 
+        \begin{equation}
+            \kappa(X) = 
+            \begin{cases}
+                \kappa_1, & X < Z_1 \\
+                \kappa_2, & X > Z_1
+            \end{cases}
+        \end{equation}
+        \pause
+        \item The derivative is zero except for at the transition point (step function),
+        $\kappa'(X) = \left( \kappa_2 - \kappa_1 \right) \delta (X - Z_1)$,
+        and hence the interaction operator takes the form
+        \begin{multline}
+            \mathcal{L} ' (X) = - a_1 (X) \delta (X - Z_1) \left[ \partial_X + \beta \alpha b_1 \delta (X - Z_1) \right] \\
+            - \beta \alpha b_1 \left[ \delta'(X - Z_1) + \delta (X - Z_1) \partial_X \right],
+        \end{multline}
+        where we have defined
+        \begin{equation}
+            a_1 (X) = \frac{\sqrt{\kappa_2} - \sqrt{\kappa_1}}{\sqrt{\kappa(X)}}, \qquad b_1 
+            = \kappa_2 - \kappa_1
+        \end{equation}
+    \end{itemize}
+\end{frame}
+
+\end{document}
