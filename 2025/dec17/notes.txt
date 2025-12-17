@@ -1,5 +1,11 @@
+- probability density funciton
+- can you solve using as a CTMW on the discrete states? spectral analysis?
+- reduce the problem to a system of two equations analytically?
 
-
+Ideas related to random barrier model and its applications:
+- simulate lipid phase sep with variable barrier heights
+- how does the "natural variation of density" of pickets lead to a variation in the hopping rate?
+- fixed density and fixed size
 
 Miscellaneous:
 - TASI 2026? (https://www.colorado.edu/conference/bss/2026/boulder-school-2026)
