@@ -1,9 +1,9 @@
-- probability density funciton
-- can you solve using as a CTMW on the discrete states? spectral analysis?
+General presentation comments:
+- can you solve the lattice approach using as a CTMW on the discrete states? spectral analysis?
 - reduce the problem to a system of two equations analytically?
 
 Ideas related to random barrier model and its applications:
-- simulate lipid phase sep with variable barrier heights
+- simulate lipid phase separation with variable barrier heights
 - how does the "natural variation of density" of pickets lead to a variation in the hopping rate?
 - fixed density and fixed size
 

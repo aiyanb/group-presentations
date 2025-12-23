@@ -41,10 +41,9 @@ function simulate_membrane_walk(; rng=Xoshiro(1234),
 )
     b1 = floor(Int, barriers[1])
     b2 = floor(Int, barriers[2])
-    slow_lo, slow_hi = b1 + 1, b2
 
     dt_site = fill(Δt_fast, N)
-    dt_site[slow_lo:slow_hi] .= Δt_slow
+    dt_site[b1+1:b2] .= Δt_slow
 
     cross_right = falses(N); cross_left = falses(N)
     cross_right[b1] = true;  cross_left[b1 + 1] = true
@@ -54,8 +53,8 @@ function simulate_membrane_walk(; rng=Xoshiro(1234),
     xZ = xwrap # unwrapped integer coordinate
     t = 0.0
 
-    posZ  = Int[]; times = Float64[]
-    push!(posZ, xZ); push!(times, t)
+    posZ = Int[];  times = Float64[]
+    push!(posZ, xZ);  push!(times, t)
 
     stepcount = 0
     while t < T
