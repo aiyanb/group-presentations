@@ -1,0 +1,28 @@
+\documentclass[12pt]{beamer}
+\usetheme{Madrid}
+
+\usepackage{amsmath, amsfonts}
+\usepackage{hyperref}
+\usepackage[super,comma,numbers]{natbib}
+\renewcommand{\bibnumfmt}[1]{[#1]}
+\bibliographystyle{apsrev4-1}
+
+\title[Coarse-graining semi-permeability]{Coarse-graining a diffusion process with semi-permeable domain walls}
+\author[A. Brown]{Aiyan B. | Hathcock group}
+\date{January 6, 2026}
+
+\newcommand{\abs}[1]{\left| #1 \right|} % | |
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle} % < >
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Model outline and coarse-graining}
+    % different diffusivities with domain walls with given probability to transmit
+    % can coarse grain so each domain (region with constant diffusivity, separated by membrane) is regarded as a single site on some effective lattice
+    % this CG process amounts to an effective CTRW with one-step memory (higher probability to return to site you just came from since you can get rid of term to propagate from one edge to the other to escape)
+    % waiting time distribution depends on domain size, diffusivity, and permissivity of the membrane(s)
+\end{frame}
+
+\end{document}
