@@ -1,0 +1,13 @@
+- should barrirs be interpretted as staying at the point with rate lambda or hopping to the left?
+    - double check that I get similar behaviour in this case?
+- double check continuum limit slide 2 for delta function
+- go through Kay-Giuggulio derivation again for our new functional form
+- consider periodic BC agin with initial position sampled from stationary distribution
+- correspondence between MSD computed via first-passage time density approach and continuum model: 
+  misses short-timescale due to approximations
+- Steps for computing the first passage time density:
+    1. Density from an arbitrary initial position to the edge
+    2. From one edge to the other
+    3. Recurring to the edge
+- Can non-power law behaviour give rise to power law domain FPT density?
+- coarse-grained process is non-Markovian?
