@@ -9,10 +9,11 @@ Administrative TODOs:
 
 Research TODOs:
 - Is there an exact solution to the 1D heat equation with Robin/ generalized leather BC?
-- Is there any way to make the CTRW coarse graining idea feasible in dimensions >1?
 - Can the ideas of Massignan et al 2014 (doi.org/10.1103/PhysRevLett.112.150603) be combined with Grebenkov 2020 (doi.org/10.1103/PhysRevLett.125.078102) to give an idea about the behaviour of MSD for reflective models?
     - compute lowest order mode of spectral expansion for non-trivial geometries
     - improve 2014 model by starting from edge. can view as an annealed CTRW?
 
 Additional notes:
 - presentation statement of conditional independence is incorrect unless there is a symmetry in the domains, which is generally broken in 2D for finite sized regions (same for diffusivity vs permissivity asymmetry)
+- Is there any way to make the CTRW coarse graining idea feasible in dimensions >1?
+    - can quasi birth death processes be used to encode memory (perhaps an infinite amount/ continuum)
