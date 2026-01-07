@@ -1,0 +1,15 @@
+- relatively poor communication/ presentation abilities
+- how does a system evolve when constrained?
+- stochastic thermodynamics: define thermodynamic quantities at the trajectory (stochastic) level
+- minimize MSE but due not know ground truth (unsupervised): E[0.5*w^2 - w*f]
+	- f is a local function but do not know. want to approximate. 
+	- assume, for example, we are interested in forces F: dX = Fdt + sdW. then E[w*f] dt = E[w dX] + o (dt)
+	- FT only holds if ergodic (incorrect answer given with confidence)
+	- did not consider the error terms in the models (e.g., difference between first and second order, etc.)
+	- reasonably answered questions regarding cost functions
+
+- Landauer principle: kT log2 to remove one bit of energy. but what if we want to do this in finite time
+	- equivalently, what if we want to modify a system to have multiple minima to have a single minima? how can we minimize work/ energy expenditure in finite time
+	- e.g., move harmonic from 0 to a. optimal protocol (minimize work) if near linear + jumps (2007; PRL)
+		- issue: want to strike a balance between protocol for work and motion of the particle (expectation value)
+	- observe effective "phase transition" in ratio of coefficient waiting between work and particle position (relative to ideal)
