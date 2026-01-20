@@ -13,7 +13,7 @@
 
 \title[Annealed model]{An annealed model of diffusion in semi-permeable domains}
 \author[Hathcock group]{A. Brown | Hathcock group}
-\date{January 16, 2026}
+\date{January 20, 2026}
 
 
 \newcommand{\abs}[1]{\left| #1 \right|} % | |
@@ -91,13 +91,13 @@
         {%
             \setlength{\belowdisplayskip}{0pt}
             \setlength{\belowdisplayshortskip}{0pt}
-            \begin{equation}
+            \[
                 \mathcal{T}_\ell = \inf{\left\{ t > 0 : \ell_t > \ell \right\}}
-            \end{equation}
+            \]
         }%
         \pause
         \item $\mathbb{P}_{x_0} \{ \ell_t > \ell \} \iff \mathbb{P}_{x_0} \{ t > \mathcal{T}_\ell \}$ and so
-        \begin{equation}
+        \begin{equation} \label{eq:exit-time-density}
             U (\ell, t \mid x_0) = \frac{\partial \mathbb{P}_{x_0} \{ t > \mathcal{T}_\ell \}}{\partial t}
             = \int_{\ell}^\infty d \ell' \, \frac{\partial \rho (\ell', t \mid x_0)}{\partial t},
         \end{equation}
@@ -105,17 +105,21 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{The exit time density}
+\begin{frame}{The Dirichlet-to-Neumann operator}
     \begin{itemize}
         \item After taking a temporal Laplace transform ($t \xrightarrow[]{\mathcal{L}} \alpha$), 
-        it can be shown that $U$ permits a spectral representation in terms of the eigenfunctions of the Dirichlet-to-Neumann (DtN) operator~\cite{PhysRevLett.125.078102},
+        it can be shown that $U$ permits a spectral representation in terms of the eigenfunctions $v_n^{(\alpha)} (x)$ of the Dirichlet-to-Neumann (DtN) operator~\cite{PhysRevLett.125.078102},
         {%
             \setlength{\belowdisplayskip}{0pt}
             \setlength{\belowdisplayshortskip}{0pt}
-            \begin{equation}
-                \Tilde{U} (\ell, \alpha \mid x_0) = \sum_n e^{- \mu_n^\alpha \ell} [V_n^{(\alpha)} (x_0)]^* \int_{\partial \Omega} d^{n-1} s \, V_n^{(\alpha)} (s)
+            \begin{equation} \label{eq:laplace-exit-time-density}
+                \Tilde{U} (\ell, \alpha \mid x_0) = \sum_n e^{- \mu_n^\alpha \ell} [V_n^{(\alpha)} (x_0)]^* \int_{\partial \Omega} d^{n-1} y \, V_n^{(\alpha)} (y)
             \end{equation}
         }%
+        with $V_n$ denoting the projection of the eigenfunction onto the absorbing diffusive current,
+        \begin{equation} \label{eq:eigenfunction-projection}
+            V_n^{(\alpha)} (x) = \int_{\partial \Omega} d^{d - 1} y \, v_n^{(\alpha)} (y) \Tilde{j}_\infty (y, \alpha \mid x)
+        \end{equation}
         \pause
         \begin{itemize}
             \item Let $w$ be a solution to the Helmholtz equation $(\alpha - D \Delta) w = 0$ with Dirichlet BC $w |_{\partial \Omega} = f$.
@@ -124,7 +128,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Spectral representation}
+\begin{frame}{DtN eigenvalues in circular domains}
     \begin{itemize}
         \item In general we can write the eigenequation as
         \begin{equation}
@@ -134,42 +138,89 @@
         Choose the disk $\Omega = \{ \abs{x} < R, x \in \mathbb{R}^2 \}$
         \pause
         \item We allow for arbitrary boundary data $f (\theta)$. 
-        Let $u(r, \phi) = Q_n (r) e^{i n \phi}$ with $\lambda = \sqrt{\alpha / D}$.
+        Let $u_n (r, \phi) = Q_n (r) e^{i n \phi}$ with $\lambda = \sqrt{\alpha / D}$.
         The modified Helmholtz equation reads
         {
             \setlength{\belowdisplayskip}{0pt}
             \setlength{\belowdisplayshortskip}{0pt}
-            \begin{equation}
+            \[
                 r^2 Q_n'' (r) + r Q_n' (r) - \left( n^2 + \lambda^2 r^2 \right) Q_n (r) = 0
-            \end{equation}
+            \]
         }
         \pause
         \item Solutions are modified Bessel functions.
         Enforcing regularity,
-        \begin{equation}
-            u (r, \phi, \alpha) = \sum_{n = -\infty}^\infty a_n I_{\abs{n}} (\lambda r) e^{i n \phi}
+        \begin{equation} \label{eq:modified-helmholtz-solution}
+            u (r, \phi, \alpha) = \sum_{n = -\infty}^\infty c_n I_{\abs{n}} (\lambda r) e^{i n \phi}
         \end{equation}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Spectral representation}
+\begin{frame}{DtN eigenvalues in circular domains}
     \begin{itemize}
         \item But now we note that $e^{i n \phi}$ is not altered by the normal derivative.
         As such, we may identify the eigenfunctions $v_n (\phi) = e^{i n \phi}$ as the Fourier modes and compute
-        \begin{equation}
+        \[
             [\mathcal{M}_\alpha v_n] (\phi) = \partial_r u_n (R, \phi) = \lambda \frac{I_{\abs{n}}'(\lambda R)}{I_{\abs{n}}(\lambda R)} e^{i n \phi},
-        \end{equation}
-        so we can identify the eigenvalues
-        \begin{equation}
+        \]
+        so we can write the eigenvalues
+        \begin{equation} \label{eq:dtn-eigenvalues-circle}
             \mu_n^{(\alpha)} = \lambda \frac{I_{\abs{n}}' (\lambda R)}{I_{\abs{n}} (\lambda R)} = \lambda \frac{d}{dz} \log{I_{\abs{n}} (\lambda R)}, \qquad
             \lambda = \sqrt{\alpha/D}
         \end{equation}
         \pause
         \item We can approximate these eigenvalues at long times, $\lambda R \ll 1$ as
-        \begin{equation}
-            \mu_n^{(\alpha)} \sim \frac{n}{R} + \frac{\lambda^2 R}{2 (n+1)} - \frac{\lambda^4 R^3}{8 (n+1)^2 (n+2)} + \mathcal{O}(\lambda R^5)
+        \begin{equation} \label{eq:dtn-eigenvalues-circle-asymptotic}
+            \mu_n^{(\alpha)} \sim \frac{n}{R} + \frac{\lambda^2 R}{2 (n+1)} - \frac{\lambda^4 R^3}{8 (n+1)^2 (n+2)} + \mathcal{O}(\lambda^5 R^5)
         \end{equation}
     \end{itemize}
+\end{frame}
+
+\begin{frame}{The absorbing propagator}
+    \begin{itemize}
+        \item With the eigenvalues determined, we are now in a position to return to the density Eq.~\eqref{eq:laplace-exit-time-density}.
+        \pause
+        \item In order to evaluate the perfectly-reactive (absorbing) diffusive current, we must determine its propagator.
+        Assuming all motion begins at the centre of the circular domain of radius $R$, we find
+        \begin{equation} \label{eq:absorptive-propagator}
+            \Tilde{G}_\infty (r, \alpha \mid r_0 = 0) = \frac{1}{\pi R^2} \sum_n \frac{1}{\alpha + D j_n^2 / R} \frac{J_0 \left( r j_n / R \right)}{[J_1 (j_n)]^2}
+        \end{equation}
+        where $J_\alpha$ is a Bessel function of the first kind and $j_n$ is the $n$th zero of the function $J_0$
+        \pause
+        \item Computing the normal derivative and multipling by $-D$,
+        \[
+            - \frac{\Tilde{j}_{\infty} (y, t \mid x_0)}{D} = \left. \frac{\partial \Tilde{G}_\infty (x, \alpha \mid x_0)}{\partial n} \right|_{x = y}
+            = \frac{1}{\pi R^3} \sum_n \frac{j_n}{\alpha + \frac{D j_n^2}{R}} \frac{J_0' \left( j_n \right)}{[J_1 (j_n)]^2}
+        \]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Projection operators}
+    \begin{itemize}
+        \item The \emph{projection operator} of the (circular) DtN eigenfunctions are the Fourier transform of the absorptive current,
+        {
+            \setlength{\belowdisplayskip}{0pt}
+            \setlength{\belowdisplayshortskip}{0pt}
+            \[
+                V_n^{(\alpha)} (r_0, \phi_0) = \int_0^{2 \pi} d \phi \, e^{i n \phi} \Tilde{j}_\infty (\phi, \alpha \mid r_0, \phi_0)
+            \]
+        }
+        \pause
+        \item Assuming motions start from $r_0 = 0$, $\partial_\phi \Tilde{j} = 0$ so these integrals vanish for all $n \neq 0$:
+        {   
+            \setlength{\belowdisplayskip}{0pt}
+            \setlength{\belowdisplayshortskip}{0pt}
+            \begin{equation} \label{eq:circle-middle-projection}
+                V_n^{(\alpha)} (r_0 = 0) = - \frac{2 D}{\pi R^3} \delta_{0, n} \sum_m \frac{j_m}{\alpha + D j_m^2 / R} \frac{J_0' \left( j_m \right)}{[J_1 (j_m)]^2}
+            \end{equation}
+        }
+        \pause
+        \item Substituting into the equation for the exit time density,
+        \begin{equation}
+            \Tilde{U} (\ell, \alpha \mid x_0) = \frac{8 \pi D^2}{R^6} e^{- \lambda \ell \frac{d}{dz} \log{I_0 (\lambda R)}} 
+            \left( \sum_m \frac{j_m}{\alpha + \frac{D j_m^2}{R}} \frac{J_0' \left( j_m \right)}{[J_1 (j_m)]^2} \right)^2
+        \end{equation}
+    \end{itemize} 
 \end{frame}
 
 \begin{frame}{References}
@@ -205,7 +256,7 @@
     \end{equation}
     where $\Tilde{G}_\infty$ is the propagator with absorbing boundary conditions,
     \begin{subequations}
-        \begin{align} \label{eq:dirichlet-propagator}
+        \begin{align} \label{eq:dirichlet-propagator-laplace}
             (\alpha - D \Delta) \Tilde{G}_\infty (x, \alpha \mid x_0) & = \delta (x - x_0), \quad x \in \Omega \\ \label{eq:absorbing-bc}
             \Tilde{G}_\infty (x, \alpha \mid x_0) & = 0, \quad x \in \partial \Omega.
         \end{align}
@@ -307,6 +358,49 @@
     Taking the logarithm, performing an expansion $\log{(1 + x)} \sim x - \frac{x^2}{2} + \frac{x^3}{3} + \mathcal{O} (x^4)$, and differentiating,
     \begin{equation}
         \frac{I_n' (z)}{I_n (z)} = \frac{n}{z} + \frac{z}{2 (n+1)} - \frac{z^3}{8 (n+1)^2 (n+2)} + \mathcal{O}(z^5)
+    \end{equation}
+\end{frame}
+
+\begin{frame}{The absorbing diffusive propagator}
+    The absorbing propagator $G_\infty (x, t \mid x_0)$ makes its appearance in many of the equations for such semi-permeable systems 
+    to account for the probability of a walker never interacting with the boundary.
+    Determining such a $G$ is a relatively simple task in PDEs,
+    \begin{align*}
+        \frac{\partial G_\infty (x, t \mid x_0)}{\partial t} & = D \Delta G_\infty (x, t \mid x_0), \quad x \in \Omega \\
+        G_\infty (x, t = 0 \mid x_0) & = \delta (x - x_0) \\
+        G_\infty (x, t \mid x_0) & = 0, \quad x \in \partial \Omega.
+    \end{align*}
+    We perform a separation of variables $G_\infty = T P \Phi$ to find the equivalent differential equation problems.
+    If we choose $r_0 = 0$, the initial conditions become $\delta (r) / 2 \pi r$ which is independent of $\theta$ and so we can neglect this term:
+    \begin{equation*}
+        \Dot{T} = - D \lambda T, \quad
+        \rho \frac{d}{d \rho} \left( \rho \frac{d P}{d \rho} \right) + \lambda \rho^2 P = 0
+    \end{equation*}
+\end{frame}
+
+\begin{frame}{The absorbing diffusive propagator}
+    The first equation is trivially exponential while the second is a Bessel equation with $\alpha = 0$.
+    Enforcing the Dirichlet condition on the eigenfunctions ensures that $\lambda = j_n^2$ where $j_n$ is the $n$th solution of $J_0$.
+    Summing over the eigenfunctions,
+    \[
+        G_\infty (r, t \mid r_0 = 0) = \sum_n c_n J_0 \left( \frac{r j_n}{R} \right) e^{- D j_n^2 t / R}.
+    \]
+    The coefficients are uniquely determined via the orthogonality relation for Bessel functions with Dirichlet BC, %https://www.cfm.brown.edu/people/dobrush/am34/Mathematica/ch7/besselo.html
+    \[
+        \int_0^R x J_\alpha \left( \frac{x \mu_k}{R} \right) J_\alpha \left( \frac{x \mu_n}{R} \right) \, d x = 
+        \frac{R^2}{2} [J_{\nu + 1} (\mu_n)]^2 \delta_{k,n}
+    \]
+\end{frame}
+
+\begin{frame}{The absorbing diffusive propagator}
+    Multiplying both sides of the propagator by $r J_0 (r j_k / R)$ and integrating from 0 to $R$,
+    we find $c_n = 1 / \pi R^2 [J_1 (j_n)]^2$ and so
+    \begin{equation}
+        G_\infty (r, t \mid r_0 = 0) = \frac{1}{\pi R^2} \sum_n \frac{J_0 \left( r j_n / R \right)}{[J_1 (j_n)]^2} e^{- D j_n^2 t / R}.
+    \end{equation}
+    Since $D j_n / R > 0$, the Laplace transform converges,
+    \begin{equation}
+        \Tilde{G}_\infty (r, \alpha \mid r_0 = 0) = \frac{1}{\pi R^2} \sum_n \frac{1}{\alpha + D j_n^2 / R} \frac{J_0 \left( r j_n / R \right)}{[J_1 (j_n)]^2}.
     \end{equation}
 \end{frame}
 
