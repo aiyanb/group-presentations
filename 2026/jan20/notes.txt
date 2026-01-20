@@ -1,0 +1,12 @@
+Administrative:
+- contact Krystyna regarding if chairs can be swapped before committee meeting?
+	- ask Claudiu to make sure everything is a-okay in this regard
+
+Research:
+- currently believe that the conditioning on certain trajectories results in circular reasoning (get "confinement" if you condition on it)
+- paper (Near-Critical Fluctuations and Cytoskeleton-Assisted Phase Separation Lead to Subdiffusion in Cell Membranes, Fig. 2) seems to demonstrate that the slow diffusion lipids collect near the boundaries themselves and in the smaller regions => some correlation between parameters of the model
+- consider integral over space for Robin BC directly
+- is ell the only place that kappa joins the final density in?
+- check limiting behaviour compared to 2014 result
+	- check their calculation in two dimensions and look at exponents
+	- can we make a distinction between no cytoskeleton and some? lipid raft size?
