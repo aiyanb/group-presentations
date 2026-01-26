@@ -1,0 +1,6 @@
+TODOS:
+- sufficient conditions for a power law in psi given we know that the q(tau | r) propagator of exit time conditioned on fixed radius should follow that for a bessel process (https://arxiv.org/pdf/1505.07551)
+- need to better understand technical details of ergodicity breaking and the Tauberian theorems
+- combine this week's work with last:
+    - more expliticly note that we are conditioning on the radius size in the exit time density
+    - relate U density from last week to psi and phi so their characteristic functions can be calculated
